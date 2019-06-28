@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
@@ -10,7 +10,8 @@ export class BuscadorComponent implements OnInit {
 heroes:any[]=[];
 termino:string;
   constructor(private activatedRouter: ActivatedRoute,
-              private _heroesSerice: HeroesService) { }
+              private _heroesSerice: HeroesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.activatedRouter.params.subscribe(params=>{
@@ -19,5 +20,7 @@ termino:string;
       this.heroes= this._heroesSerice.buscarHeroes(params['termino']);  
     })
   }
-
+  verHeroe(idx: number){
+    this.router.navigate(['/heroe', idx]);
+    }
 }
